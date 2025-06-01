@@ -3,7 +3,7 @@
 ## 🚀 Quick Start (One Command Installation)
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/your-repo/ultimate-agent0-installer.sh | sudo bash
+curl -fsSL https://raw.githubusercontent.com/Thot3Process/testingclaudeout/main/agent0_installer.sh | sudo bash
 ```
 
 That's it! The script will handle everything automatically.
