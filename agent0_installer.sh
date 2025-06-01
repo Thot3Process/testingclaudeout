@@ -558,7 +558,7 @@ install_system_packages() {
     
     # Update package lists
     print_info "Updating package lists..."
-    retry_command sudo apt-get update -y
+    retry_command "sudo apt-get update -y"
     
     # Essential packages
     local packages=(
@@ -634,9 +634,11 @@ install_system_packages() {
         show_progress $current $total
         
         if ! dpkg -l | grep -q "^ii  $package "; then
-            retry_command sudo apt-get install -y "$package" &>/dev/null || {
-                print_warning "Failed to install $package"
-            }
+            # Pass the command as a single string. Note the quoting for "$package".
+            if ! retry_command "sudo apt-get install -y \"$package\""; then
+                print_warning "Failed to install $package after multiple attempts"
+                # Decide if you want to exit or continue if a package fails
+            fi
         fi
     done
     
